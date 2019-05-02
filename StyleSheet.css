@@ -1,0 +1,44 @@
+body {
+	background-color: black;
+	overflow: hidden;
+}
+#countdown {
+text-align: center;
+position: absolute;
+top:50%;
+bottom:50%;
+width: 100%;
+font-size: 20em;
+color: white;
+}
+img {
+width: 450px;
+height: auto;
+}
+.right {
+	position:absolute;
+	right: 55px;
+}
+
+.left {
+	position: absolute;
+	left: 55px;
+}
+
+.top {
+position: absolute;
+top: 35px;
+}
+
+.bottom {
+position: absolute;
+bottom: 35px;
+}
+
+#qrcode {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	left: 585px;
+	bottom: 20px;
+}
