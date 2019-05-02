@@ -3,7 +3,8 @@
 <link href="StyleSheet.css" rel="stylesheet" type="text/css">
 <script>
 var countdown=5;
-var key='abc';
+var dt = new Date();
+var key=dt.getTime();
 var qrcode='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://bove.ch/companions/'.concat(key);
 var x = setInterval(function() {
 	countdown -= 1;
@@ -15,19 +16,26 @@ var x = setInterval(function() {
 	}
 	else if (countdown >= -4) {
 		document.getElementById("countdown").hidden=true;
-		const photo_link = fetch('get_photo.php?'.concat(key)).then(response => response.text()).then(data => {
-			var getNextEmptyImg = function() {
-				var photos = document.getElementsByClassName("photo");
-				for (i=0; i<photos.length; i++) {
-					if (!photos[i].src) {
-						return photos[i];
-					}
+		var getNextEmptyImg = function() {
+			var photos = document.getElementsByClassName("photo");
+			for (i=0; i<photos.length; i++) {
+				if (photos[i].hidden) {
+					return photos[i];
 				}
 			}
-			getNextEmptyImg().src=data;
-		});
+		}
+		var my_image = getNextEmptyImg();
+		my_image.hidden=false;
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', 'get_photo.php?dest='.concat(key), false);
+		xhr.send();
+		var photo_link = xhr.response;
+		console.log(photo_link);
+		my_image.src=photo_link;
+
+
 	}
-	else if (countdown = 6) {
+	else if (countdown == -10) {
 		document.getElementById("qrcode").src = qrcode;
 		document.getElementById("qrcode").hidden = false;
 	}
@@ -39,15 +47,15 @@ var x = setInterval(function() {
 <table>
 <tr>
 <td>
-<img class="photo top left"/>
+<img class="photo top left" src="loading.gif" hidden />
 </td><td>
-<img class="photo top right" />
+<img class="photo top right" src="loading.gif" hidden />
 </td>
 </tr><tr>
 <td>
-<img class="photo bottom left" />
+<img class="photo bottom left" src="loading.gif" hidden />
 </td><td>
-<img class="photo bottom right"/>
+<img class="photo bottom right" src="loading.gif" hidden />
 </td>
 </table>
 <img id="qrcode" hidden/>
