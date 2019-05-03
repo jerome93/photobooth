@@ -5,7 +5,7 @@
 var countdown=5;
 var dt = new Date();
 var key=dt.getTime();
-var qrcode='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://bove.ch/companions/'.concat(key);
+var qrcode='https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://compagnons.bove.ch/'.concat(key);
 var x = setInterval(function() {
 	countdown -= 1;
 	if (countdown >= 1) {
